@@ -1,3 +1,6 @@
+# Este projeto monitoriza o diferencial entre as taxas de juro de 2 e 10 anos.
+# Quando o spread inverte, historicamente, uma recessão ocorre nos 12-18 meses seguintes.
+
 import yfinance as yf
 import matplotlib.pyplot as plt
 import pandas as pd
