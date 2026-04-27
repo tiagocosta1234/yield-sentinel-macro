@@ -1,22 +1,27 @@
-# 📈 Yield Sentinel
+# Yield Sentinel - Macro Monitor
 
-Este é o meu primeiro passo no mundo do Quant Trading. Em vez de ficar só pela teoria, decidi construir uma ferramenta que me ajudasse a perceber o que se passa realmente com o "preço do dinheiro".
+Este repositório contém um conjunto de ferramentas em Python para monitorizar indicadores macroeconómicos críticos. O projeto foca-se na análise de taxas de juro e risco de crédito, transformando dados financeiros em sinais visuais de alerta.
 
-### Porquê este projeto?
-Inspirado pelo Gary Stevenson, percebi que a **Curva de Rendimentos (Yield Curve)** é o gráfico mais importante do mundo. Quando ela inverte (o spread 10Y-2Y fica negativo), o mercado está a dizer-nos que algo vai correr mal na economia. 
+## Estrutura do Projeto
 
-Este script monitoriza esse sinal em tempo real para eu não ter de ir ver ao site da Bloomberg todos os dias.
+O monitor está dividido em dois módulos principais:
 
-### O que é que isto faz?
-- Saca os dados das taxas de juro de 2 e 10 anos (EUA) via `yfinance`.
-- Calcula o diferencial (Spread) para ver se estamos em território de recessão.
-- Gera um gráfico limpo para análise visual rápida.
+### 1. `yield_sentinel.py` (O Pulso da Recessão)
+Focado no mercado de dívida soberana dos EUA.
+- **Indicador:** Spread entre as taxas de 10 anos e 2 anos (^TNX - ^IRX).
+- **Objetivo:** Detetar a **Inversão da Curva de Rendimentos**. Historicamente, quando este valor fica abaixo de zero, sinaliza uma recessão económica iminente.
 
-### Como correr
-Se tiveres Python instalado, é só fazer:
-1. `pip install yfinance pandas matplotlib`
-2. `python sentinel.py`
+### 2. `euro_sentinel.py` (O Nervo do Risco Global)
+Focado no sentimento de risco do mercado (Credit Stress).
+- **Indicador:** Rácio entre Corporate Bonds (LQD) e Treasury Bonds (TLT).
+- **Objetivo:** Medir o apetite pelo risco.
+  - **Rácio a subir:** Confiança na economia (Risk-on).
+  - **Rácio a cair:** Fuga para ativos seguros (Risk-off/Stress financeiro).
 
-### O que vem a seguir?
-- Adicionar o spread de crédito da Zona Euro (Portugal vs Alemanha).
-- Criar alertas no terminal quando o spread mudar bruscamente.
+---
+
+## Como Utilizar
+
+1. **Instalar dependências:**
+   ```bash
+   pip install yfinance pandas matplotlib
