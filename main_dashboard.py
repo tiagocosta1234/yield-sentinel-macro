@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def get_data():
     print("A recolher indicadores... (Sincronizando com original)")
     # Usando T-Bill 13 semanas (^IRX) e 10Y (^TNX)
-    # Nota: Se o ^IRX falhar, o script avisa
+    # Nota: Se falhar, o script avisa
     tickers = ["^TNX", "^IRX", "LQD", "TLT"]
     try:
         data = yf.download(tickers, period="1y")['Close']
@@ -18,22 +18,14 @@ def show_dashboard(df):
         print("Sem dados para exibir.")
         return
 
-    # Debug: Ver o que o Yahoo realmente nos deu
     print("Colunas recebidas:", df.columns.tolist())
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
     # --- GRÁFICO 1: YIELD CURVE ---
-    # Para garantir que DESCE como na tua imagem, vamos inverter a lógica se necessário
-    # ou usar os tickers que o Yahoo te deu.
     if '^TNX' in df.columns and '^IRX' in df.columns:
-        # Se queres que o gráfico DESÇA (inversão), subtraímos o maior do menor 
-        # ou ajustamos para refletir o spread 10Y-2Y que tinhas antes.
-        # No teu original (Imagem 2), o spread era negativo.
         spread = df['^TNX'] - df['^IRX']
-        
-        # TRUQUE VISUAL: Se queres que ele desça como o 10Y-2Y, 
-        # mas o 10Y-3M sobe, vamos subtrair uma constante ou usar a inversão:
+
         ax1.plot(df.index, spread, color='blue', label='Spread (10Y-3M)')
         ax1.axhline(spread.mean(), color='grey', linestyle='--', label='Média')
     else:
