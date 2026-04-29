@@ -6,30 +6,26 @@ Este repositório é um laboratório pessoal dedicado à exploração de modelos
 
 O laboratório está organizado nos seguintes módulos principais:
 
-### 1. SMA Backtest (Nasdaq Futures)
-Simulador quantitativo focado em contratos de futuros do Nasdaq-100.
-*   **Ficheiro**: `sma_backtest.py`
-*   **Estratégia**: Cruzamento de Médias Móveis (10/30) aplicado a **5 contratos Micro (MNQ=F)**.
-*   **Gestão de Risco**: Implementação de um **Daily Loss Limit de 4%** e cálculo de exposição nocional/alavancagem.
-*   **Métricas**: Comparação direta de performance contra a estratégia de *Buy & Hold*.
+### 1. Backtesting de Médias Móveis (Nasdaq Futures)
+Simuladores quantitativos focados em contratos de futuros do Nasdaq-100 (**MNQ=F**).
 
-### 2. Main Dashboard (Macro Indicators)
-Interface de monitorização de sentimento de mercado e stress financeiro.
-*   **Ficheiro**: `main_dashboard.py`
-*   **Yield Curve Monitor**: Spread 10Y-3M dos EUA (^TNX - ^IRX).
-*   **Credit Stress Tracker**: Rácio LQD/TLT para avaliar apetite pelo risco global.
+*   **SMA Strategy (`sma_backtest.py`)**: Implementação clássica de cruzamento de Médias Móveis Simples (10/30). Serve como o ponto de partida e *benchmark* do laboratório.
+*   **EMA Strategy (`ema_backtest.py`)**: Evolução técnica utilizando Médias Móveis Exponenciais (10/30). Esta versão reage mais rapidamente aos pivôs de preço, reduzindo o *lag* inerente às médias simples.
+*   **Gestão de Risco**: Ambos os modelos operam com **5 contratos Micro**, incluem cálculo de alavancagem real e um **Daily Loss Limit de 4%** para proteção de capital.
 
-### 3. Euro Sentinel
-Módulo dedicado à análise do par de moedas EUR/USD e indicadores da Zona Euro.
-*   **Ficheiro**: `euro_sentinel.py`
-*   **Objetivo**: Monitorizar a força relativa do Euro e diferenciais de taxas de juro.
+### 2. Sentinelas de Mercado
+Ferramentas de monitorização em tempo real para diferentes classes de ativos.
+
+*   **Main Dashboard (`main_dashboard.py`)**: Visualizador de indicadores macro como o **Yield Curve Spread (10Y-3M)** e o rácio de stress de crédito **LQD/TLT**.
+*   **Yield Sentinel (`yield_sentinel.py`)**: Focado especificamente na análise detalhada das curvas de juros e o seu impacto no custo de capital.
+*   **Euro Sentinel (`euro_sentinel.py`)**: Monitorização do par **EUR/USD**, analisando a força relativa da moeda europeia face ao dólar.
 
 ## Tecnologias Utilizadas
 
-*   **Python 3.x**: Linguagem principal.
-*   **Pandas & NumPy**: Processamento de dados e lógica vetorial de sinais.
-*   **YFinance**: Extração de dados históricos e em tempo real.
-*   **Matplotlib**: Visualização de performance e dashboards técnicos.
+*   **Python 3.x**
+*   **Pandas & NumPy**: Processamento de dados e lógica de sinais.
+*   **YFinance**: Extração de dados do Yahoo Finance.
+*   **Matplotlib**: Motor gráfico para visualização técnica.
 
 ## Como Executar
 
