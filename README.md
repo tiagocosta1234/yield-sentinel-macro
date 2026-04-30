@@ -6,12 +6,15 @@ Este repositório é um laboratório pessoal dedicado à exploração de modelos
 
 O laboratório está organizado nos seguintes módulos principais:
 
-### 1. Backtesting de Médias Móveis (Nasdaq Futures)
+## 1. Backtesting de Médias Móveis (Nasdaq Futures)
 Simuladores quantitativos focados em contratos de futuros do Nasdaq-100 (**MNQ=F**).
 
 *   **SMA Strategy (`sma_backtest.py`)**: Implementação clássica de cruzamento de Médias Móveis Simples (10/30). Serve como o ponto de partida e *benchmark* do laboratório.
 *   **EMA Strategy (`ema_backtest.py`)**: Evolução técnica utilizando Médias Móveis Exponenciais (10/30). Esta versão reage mais rapidamente aos pivôs de preço, reduzindo o *lag* inerente às médias simples.
-*   **Gestão de Risco**: Ambos os modelos operam com **5 contratos Micro**, incluem cálculo de alavancagem real e um **Daily Loss Limit de 4%** para proteção de capital.
+*   **Volatility Adjusted Strategy (`volat_adjusted_backtest.py`)**: O modelo mais avançado do laboratório. Utiliza uma arquitetura vectorizada para processar dados de 2020-2026 e implementa **Volatility Equalization**. O tamanho da posição é ajustado dinamicamente via ATR, garantindo que o risco em dólares é constante independentemente da volatilidade do mercado.
+*   **Diferenciação na Gestão de Risco**: 
+    *   Nas estratégias iniciais (**SMA/EMA**), a gestão é estática, operando com **5 contratos Micro fixos** e um limite de perda diária de 4%.
+    *   No **Volatility Adjusted Strategy**, a gestão é **dinâmica e baseada em risco nominal**: o sistema calcula o número de contratos com base na volatilidade atual (ATR), arriscando um valor fixo (ex: $4,000) por unidade de desvio. Isto permite que a estratégia reduza a exposição em mercados "selvagens" e a aumente em mercados de tendência clara, otimizando o rácio de Sharpe.
 
 ### 2. Sentinelas de Mercado
 Ferramentas de monitorização em tempo real para diferentes classes de ativos.
