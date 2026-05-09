@@ -35,3 +35,7 @@ Ferramentas de monitorização em tempo real para diferentes classes de ativos.
 1. Clonar o repositório:
    ```bash
    git clone [https://github.com/tiagocosta1234/macro-trading-lab.git](https://github.com/tiagocosta1234/macro-trading-lab.git)
+
+##Profile Views
+
+![](https://komarev.com/ghpvc/?username=tiagocosta1234)
