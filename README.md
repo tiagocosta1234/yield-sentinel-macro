@@ -12,6 +12,12 @@ Simuladores quantitativos focados em contratos de futuros do Nasdaq-100 (**MNQ=F
 *   **SMA Strategy (`sma_backtest.py`)**: Implementação clássica de cruzamento de Médias Móveis Simples (10/30). Serve como o ponto de partida e *benchmark* do laboratório.
 *   **EMA Strategy (`ema_backtest.py`)**: Evolução técnica utilizando Médias Móveis Exponenciais (10/30). Esta versão reage mais rapidamente aos pivôs de preço, reduzindo o *lag* inerente às médias simples.
 *   **Volatility Adjusted Strategy (`volat_adjusted_backtest.py`)**: O modelo mais avançado do laboratório. Utiliza uma arquitetura vectorizada para processar dados de 2020-2026 e implementa **Volatility Equalization**. O tamanho da posição é ajustado dinamicamente via ATR, garantindo que o risco em dólares é constante independentemente da volatilidade do mercado.
+* **MNQ FVG Trend Convergence (`mnq_fvg_trend_convergence.py`)**: 
+    Estratégia híbrida de alta precisão baseada na convergência de tendência e *price action* institucional (ICT).
+    * **Lógica de Entrada**: Alinhamento de tendência via **SMA15/EMA50** combinado com a ativação de gatilhos em **Fair Value Gaps (FVG)** em períodos de alta volatilidade (sessão de NY).
+    * **Dual-Target System**: Implementa uma gestão de saída assimétrica. Metade da posição fecha em 1:1 (procurando o *break-even* rápido) e a metade restante persegue um alvo de **5:1 (Reward/Risk)** para capturar tendências prolongadas.
+    * **Visualização**: Gera automaticamente uma curva de capital (`equity_curve.png`) e um log detalhado de cada trade para análise forense de performance.
+
 *   **Diferenciação na Gestão de Risco**: 
     *   Nas estratégias iniciais (**SMA/EMA**), a gestão é estática, operando com **5 contratos Micro fixos** e um limite de perda diária de 4%.
     *   No **Volatility Adjusted Strategy**, a gestão é **dinâmica e baseada em risco nominal**: o sistema calcula o número de contratos com base na volatilidade atual (ATR), arriscando um valor fixo (ex: $4,000) por unidade de desvio. Isto permite que a estratégia reduza a exposição em mercados "selvagens" e a aumente em mercados de tendência clara, otimizando o rácio de Sharpe.
@@ -28,8 +34,7 @@ Ferramentas de monitorização em tempo real para diferentes classes de ativos.
 *   **Python 3.x**
 *   **Pandas & NumPy**: Processamento de dados e lógica de sinais.
 *   **YFinance**: Extração de dados do Yahoo Finance.
-*   **Matplotlib**: Motor gráfico para visualização técnica.
-
+* **Matplotlib**: Motor gráfico utilizado para a geração da curva de capital e visualização do Drawdown.
 ## Como Executar
 
 1. Clonar o repositório:
